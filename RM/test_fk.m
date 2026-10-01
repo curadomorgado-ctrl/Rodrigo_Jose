@@ -7,6 +7,11 @@ J_cm1=jacobian_cm1(pi/3, 0.15);
 %% Test jacobian linear cm2
 J_cm2=jacobian_cm2(pi/3, (5*pi/18), 0.3, 0.1);
 %% Test jacobian angular cm1
-J_cm1_w=jacobian_cm1_w;
+J_cm1_w=jacobian_w1;
 %% Test jacobian angular cm2
-J_cm2_w=jacobian_cm2_w;
+J_cm2_w=jacobian_w2;
+%% Test mass_matrix (symbolic), ex 1.3
+syms q1 q2 m1 m2 l1 lc1 lc2 I1 I2 real
+
+M = massmatrix(q1, q2, m1, m2, l1, lc1, lc2, I1, I2);
+M = simplify(M);
