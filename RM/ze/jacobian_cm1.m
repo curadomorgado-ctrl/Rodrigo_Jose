@@ -1,4 +1,4 @@
-%% Jacobian linear, centro de massa 1, ex 1.2
+ru%% Jacobian linear, centro de massa 1, ex 1.2
 %
 % Posição do centro de massa do elo 1 (ponto a meio do elo 1,
 % a distância lc1 da base):
