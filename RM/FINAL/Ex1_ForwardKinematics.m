@@ -21,8 +21,7 @@
 % Jacobians (ex 1.2) and the dynamics (ex 1.3) both build on top of
 % this forward kinematics relationship.
 
-function [x, y, phi] = ForwardKinematics(q) % robots with 2 links
-    global l1 l2
+function [x, y, phi] = Ex1_ForwardKinematics(q, l1, l2) % robots with 2 links
     q1 = q(1); q2 = q(2);   % Joint angles
     phi = q1 + q2;
 
