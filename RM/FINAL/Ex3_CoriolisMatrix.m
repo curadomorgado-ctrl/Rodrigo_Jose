@@ -1,6 +1,5 @@
 
-function C = Ex3_CoriolisMatrix(q, dq)
-    global m2 l1 lc2
+function C = Ex3_CoriolisMatrix(q, dq, m2, l1, lc2)
     q1 = q(1); q2  = q(2);
     dq1 = dq(1); dq2 = dq(2);
 
