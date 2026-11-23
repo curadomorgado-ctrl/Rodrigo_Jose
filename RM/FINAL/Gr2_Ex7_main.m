@@ -2,7 +2,7 @@
 % Control law (slide 159 with Ki = 0, gravity compensation eq. 5.6, tau = J'F eq. 3.143):
 %   tau_c = g(q) + J'*[Kp*(Xd - X) + Kd*(dXd - dX)]      (Kd = 0 -> P control)
 clear; close all;
-modelo = 'Ex7_2LinkRobot_TaskSpacePD';   % Simulink model (copy of Ex6)
+modelo = 'Gr2_Ex7_2LinkRobot_TaskSpacePD';   % Simulink model (copy of Ex6)
 
 % Robot parameters [m1 m2 l1 l2 g0 Fv]
 m1 = 0.3;  m2 = 0.1;  l1 = 0.3;  l2 = 0.2;  g0 = 9.8;  Fv = 0.04;
@@ -27,34 +27,38 @@ yref = ellipse(2) + ellipse(4)*sin(s);
 %% P control
 Kp = 100;  Kd = 0;
 out = sim(modelo, 'StopTime', Tsim);
-PlotRobot(out, l1, l2, xref, yref);
+titleP    = '2.7) Position Control in the Task Space - Ellipse';
+subtitleP = '$\tau_e = 0$, $q_0  = [0, \pi/2]^T$; $dq_0 = [0, 0]^T$, $Kp = 100$, $Kd = 0$';
+Gr2_PlotRobot(out, l1, l2, xref, yref, titleP, subtitleP);
 outP = out;
 
 %% PD control
 Kp = 100;  Kd = 10;
 out = sim(modelo, 'StopTime', Tsim);
-PlotRobot(out, l1, l2, xref, yref);
+titlePd    = '2.7) Position Control in the Task Space - Ellipse';
+subtitlePd = '$\tau_e = 0$, $q_0  = [0, \pi/2]^T$; $dq_0 = [0, 0]^T$, $Kp = 100$, $Kd = 10$';
+Gr2_PlotRobot(out, l1, l2, xref, yref, titlePd, subtitlePd);
 outPD = out;
 
-%% Tracking error P vs PD
-figure;
-hold on;
-runs = {outP, outPD};
-for r = 1:2
-    t = runs{r}.tout;
-    q = squeeze(runs{r}.q_data);
-    if size(q,1) == 2
-        q = q';
-    end
-    x  = l1*cos(q(:,1)) + l2*cos(q(:,1)+q(:,2));
-    y  = l1*sin(q(:,1)) + l2*sin(q(:,1)+q(:,2));
-    w  = 2*pi*ellipse(5);
-    xd = ellipse(1) + ellipse(3)*cos(w*t);
-    yd = ellipse(2) + ellipse(4)*sin(w*t);
-    plot(t, sqrt((xd-x).^2 + (yd-y).^2)*1000, 'LineWidth', 1.5);
-end
-grid on;
-xlabel('t [s]');
-ylabel('position error [mm]');
-legend('P', 'PD');
-title('End-effector tracking error');
+% %% Tracking error P vs PD
+% figure;
+% hold on;
+% runs = {outP, outPD};
+% for r = 1:2
+%     t = runs{r}.tout;
+%     q = squeeze(runs{r}.q_data);
+%     if size(q,1) == 2
+%         q = q';
+%     end
+%     x  = l1*cos(q(:,1)) + l2*cos(q(:,1)+q(:,2));
+%     y  = l1*sin(q(:,1)) + l2*sin(q(:,1)+q(:,2));
+%     w  = 2*pi*ellipse(5);
+%     xd = ellipse(1) + ellipse(3)*cos(w*t);
+%     yd = ellipse(2) + ellipse(4)*sin(w*t);
+%     plot(t, sqrt((xd-x).^2 + (yd-y).^2)*1000, 'LineWidth', 1.5);
+% end
+% grid on;
+% xlabel('t [s]');
+% ylabel('position error [mm]');
+% legend('P', 'PD');
+% title('End-effector tracking error');

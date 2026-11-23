@@ -143,3 +143,17 @@ G = simplify(GravityVector);
 disp('Gravity vector G(q):')
 disp(G)
 % fprintf('Dimensions of G: %d x %d\n\n', size(G));
+
+
+%% 3 - Comparision with function made by AI tool
+
+[M_AI, C_AI, G_AI] = Gr2_Ex3_AI_Tool_Dynamics();
+
+disp("Symbolic Inertia Matrix made by AI tool: ")
+disp(M_AI)
+
+disp("Symbolic Coriolis Matrix made by AI tool: ")
+disp(C_AI)
+
+disp("Symbolic Gravity Vector made by AI tool: ")
+disp(G_AI)

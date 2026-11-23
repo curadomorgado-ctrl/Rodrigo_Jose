@@ -3,8 +3,8 @@
 %   tau_c = g(q) + J'*[Kp*(Xd - X) + Kd*(dXd - dX)]      (Kd = 0 -> P control)
 % Reference: back-and-forth motion along a straight line with slope theta
 %   Xd = C + A*[cos(theta); sin(theta)]*sin(2*pi*f*t)
-clear; close all;
-modelo = 'Ex8_2LinkRobot_TaskSpacePD';   % Simulink model (copy of Ex7)
+clear all; clc; close all;
+modelo = 'Gr2_Ex8_2LinkRobot_TaskSpacePD';   % Simulink model (copy of Ex7)
 
 % Robot parameters [m1 m2 l1 l2 g0 Fv]
 m1 = 0.3;  m2 = 0.1;  l1 = 0.3;  l2 = 0.2;  g0 = 9.8;  Fv = 0.04;
@@ -27,4 +27,4 @@ theta = 130*pi/180;
 diagLine = [xc yc A theta f];
 Kp = 100;  Kd = 10;
 out = sim(modelo, 'StopTime', Tsim);
-PlotRobot(out, l1, l2, xc + A*cos(theta)*[-1 1], yc + A*sin(theta)*[-1 1]);
+Gr2_PlotRobot(out, l1, l2, xc + A*cos(theta)*[-1 1], yc + A*sin(theta)*[-1 1]);
